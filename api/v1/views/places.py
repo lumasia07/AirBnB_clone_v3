@@ -10,7 +10,7 @@ from models.user import User
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'])
-def all_places(city_id):
+def all_places(city_id: str):
     """Retrieves a list of all place objects of a City"""
     city = storage.get(City, city_id)
     if not city:
@@ -39,7 +39,7 @@ def delete_place(place_id: str):
 
 
 @app_views.route('/cities/<city_id>/places', methods=['POST'])
-def create_place():
+def create_place(city_id: str):
     """Creates a Place"""
     city = storage.get(City, city_id):
 

@@ -15,10 +15,10 @@ def all_place_amenities(place_id: str):
     if not place:
         abort(404)
     if storage.__class__.__name__ == 'DBStorage':
-        amens = place.amenities
+        amenities = place.amenities
     else:
-        amens = [storage.get(Amenity, amenity_id)
-                 for amenity_id in place.amenity_ids]
+        amenities = [storage.get(Amenity, amenity_id)
+                     for amenity_id in place.amenity_ids]
     return jsonify([x.to_dict() for x in amenities if x])
 
 

@@ -2,6 +2,8 @@
 """Creates a view for reviews"""
 
 from models import storage
+from models.place import Place
+from models.user import User
 from models.review import Review
 from api.v1.views import app_views
 from flask import jsonify, request, abort
@@ -9,7 +11,7 @@ from flask import jsonify, request, abort
 
 @app_views.route('places/<place_id>/reviews',
                  methods=['GET'], strict_slashes=False)
-def all_reviews(place_id):
+def all_reviews(place_id: str):
     """Retrieves a list of all review objects"""
     place = storage.get(Place, place_id)
     if not place:
@@ -40,7 +42,7 @@ def delete_review(review_id: str):
 
 @app_views.route('/places/<place_id>/reviews',
                  methods=['POST'], strict_slashes=False)
-def create_review():
+def create_review(place_id: str):
     """Creates a Review"""
     place = storage.get(Place, place_id)
     if not place:
